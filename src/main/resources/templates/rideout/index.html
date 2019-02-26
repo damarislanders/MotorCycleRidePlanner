@@ -1,0 +1,30 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title>Rideout</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <p th:text="#{rideout.welcome}"></p>
+
+    <article class="rideout" th:each="rideout : ${rideouts}" th:object="${rideout}">
+        <h1 class="rideout__title">
+            <th:block th:text="|Rideout *{id}|"/>
+            <a class="rideout__edit-link" th:href="@{/rideout/{id}/edit(id=*{id})}"><i class="far fa-pencil"></i></a>
+        </h1>
+        <p class="rideout__description" th:text="*{description}"></p>
+        <section th:each="itineraryItem : ${rideout.itinerary}" th:object="${itineraryItem}">
+            <th:block th:switch="*{type.name()}">
+                <i class="rideout__itinerary-item-icon far fa-hotel" th:case="ACCOMMODATION"></i>
+                <i class="rideout__itinerary-item-icon far fa-ship" th:case="STOP"></i>
+                <i class="rideout__itinerary-item-icon fas fa-motorcycle" th:case="STOP"></i>
+                <i class="rideout__itinerary-item-icon far fa-shoe-prints" th:case="STOP"></i>
+            </th:block>
+            <h2 class="rideout__itinerary-item-title" th:text="*{address}"></h2>
+            <p class="rideout__itinerary-item-description" th:text="*{description}"></p>
+        </section>
+    </article>
+</main>
+</body>
+</html>

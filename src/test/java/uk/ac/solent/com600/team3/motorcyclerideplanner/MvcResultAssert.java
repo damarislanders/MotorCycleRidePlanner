@@ -25,7 +25,7 @@ public final class MvcResultAssert extends AbstractAssert<MvcResultAssert, MvcRe
 
     public MvcResultAssert hasStatus(HttpStatus status) {
         isNotNull();
-        var actualStatus = actual.getResponse().getStatus();
+        int actualStatus = actual.getResponse().getStatus();
         if (actualStatus != status.value()) {
             failWithMessage("%nExpecting status:%n  <%s>%nto be:%n  <%s>", HttpStatus.valueOf(actualStatus), status);
         }
@@ -35,7 +35,7 @@ public final class MvcResultAssert extends AbstractAssert<MvcResultAssert, MvcRe
     public MvcResultAssert hasContent(String content) {
         isNotNull();
         try {
-            var actualContent = actual.getResponse().getContentAsString();
+            String actualContent = actual.getResponse().getContentAsString();
             if (!actualContent.equals(content)) {
                 failWithMessage("%nExpecting content:%n  <%s>%nto be:%n  <%s>", actualContent, content);
             }

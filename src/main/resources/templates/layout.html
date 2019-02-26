@@ -1,19 +1,23 @@
 <!doctype html>
-<html th:lang="${#locale.language}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      th:lang="${#locale.language}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Document</title>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Ride Planner</title>
 
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" crossorigin="anonymous" integrity="sha384-M86HUGbBFILBBZ9ykMAbT3nVb0+2C7yZlF8X2CiKNpDOQjKroMJqIeGZ/Le8N2Qp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Montserrat">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous" integrity="sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev">
     <link rel="stylesheet" th:href="@{/main.css}">
 </head>
-<body>
-<header>
-    <h1>Motorcycle Ride Planner</h1>
-</header>
+<body data-instant-allow-query-string>
+<header></header>
 <main layout:fragment="content"></main>
+<script th:src="@{/main.js}"></script>
+<script type="module" src="https://instant.page/1.2.0" crossorigin="anonymous" integrity="sha384-0xWpXpkOUkAVETH+RMYJlSFIDNGlnPHgmqv2rP3uZS1BM48EMcxAZGW09n4pTGV4"></script>
 </body>
 </html>

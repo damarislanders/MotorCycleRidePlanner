@@ -1,0 +1,32 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="|Rideout ${rideout.id}|"></title>
+</head>
+<body>
+<main layout:fragment="content">
+    <form class="form rideout" method="post" th:action="@{/rideout/{id}/edit(id=*{id})}" th:object="${rideout}">
+        <h1 class="rideout__title" th:text="|Rideout *{id}|"></h1>
+        <textarea class="rideout__description" title="Description" autofocus th:field="*{description}"></textarea>
+        <input type="hidden" th:field="*{maxRiders}">
+
+        <section th:each="itineraryItem : ${rideout.itinerary}">
+            <th:block th:switch="${itineraryItem.type.name()}">
+                <i class="rideout__itinerary-item-icon far fa-hotel" th:case="ACCOMMODATION"></i>
+                <i class="rideout__itinerary-item-icon far fa-ship" th:case="STOP"></i>
+                <i class="rideout__itinerary-item-icon fas fa-motorcycle" th:case="STOP"></i>
+                <i class="rideout__itinerary-item-icon far fa-shoe-prints" th:case="STOP"></i>
+            </th:block>
+            <h2 class="rideout__itinerary-item-title" th:text="${itineraryItem.address}"></h2>
+            <textarea class="rideout__itinerary-item-description" rows="5" th:field="${rideout.itinerary[__${itineraryItemStat.index}__].description}"></textarea>
+        </section>
+
+        <div class="form__controls">
+            <input type="submit" class="button" th:value="#{form.save}">
+            <a class="button button--outline" th:href="@{/rideout}" th:text="#{form.cancel}"></a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

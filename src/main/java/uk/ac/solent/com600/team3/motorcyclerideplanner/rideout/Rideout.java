@@ -34,7 +34,7 @@ public class Rideout {
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Rideout)) return false;
-        var rideout = (Rideout) o;
+        Rideout rideout = (Rideout) o;
         return maxRiders == rideout.maxRiders &&
                 Objects.equals(description, rideout.description) &&
                 state == rideout.state;
