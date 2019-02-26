@@ -18,10 +18,18 @@
     <name>Motorcycle Ride Planner</name>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>8</java.version>
+
+        <errorprone.version>2.3.3</errorprone.version>
+        <nullaway.version>0.6.5</nullaway.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.errorprone</groupId>
+            <artifactId>error_prone_annotations</artifactId>
+            <version>${errorprone.version}</version>
+        </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
@@ -66,6 +74,37 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>${java.version}</release>
+                    <showWarnings>true</showWarnings>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>${errorprone.version}</version>
+                        </path>
+                        <path>
+                            <groupId>com.uber.nullaway</groupId>
+                            <artifactId>nullaway</artifactId>
+                            <version>${nullaway.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-XDcompilePolicy=byfile</arg>
+                        <arg>
+                            -Xplugin:ErrorProne
+                            -Xep:NullAway:ERROR
+                            -XepOpt:NullAway:AnnotatedPackages=uk.ac.solent.com600.team3.motorcyclerideplanner
+                            -XepOpt:NullAway:ExcludedFieldAnnotations=org.springframework.beans.factory.annotation.Autowired,org.springframework.boot.test.mock.mockito.MockBean
+                            -XepOpt:NullAway:ExternalInitAnnotations=javax.persistence.Entity
+                        </arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
