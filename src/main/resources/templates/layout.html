@@ -1,0 +1,19 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Document</title>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.7.2/css/all.css" crossorigin="anonymous" integrity="sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev">
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<header>
+    <h1>Motorcycle Ride Planner</h1>
+</header>
+<main layout:fragment="content"></main>
+</body>
+</html>
